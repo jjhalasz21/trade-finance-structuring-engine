@@ -7,7 +7,7 @@ MODEL_HAIKU = "claude-haiku-4-5-20251001"
 
 ROE_HURDLE = 0.12
 TAX_RATE = 0.25
-FTP_RATE = 0.0535  # SOFR proxy
+FTP_RATE = 0.0020  # bank's credit spread above SOFR (margin already nets out SOFR)
 
 # Basel III CCF by product + commitment
 CCF = {

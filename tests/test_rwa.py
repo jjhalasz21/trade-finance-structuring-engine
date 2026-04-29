@@ -10,10 +10,10 @@ def test_rf_committed_a_rated():
         committed=True,
         obligor_rating="A",
     )
-    # EAD = 200 + (250 * 1.00) = 450; RW=0.50; RWA=225; Capital=225*0.12=27
-    assert abs(result["ead_mm"] - 450.0) < 0.01
-    assert abs(result["rwa_mm"] - 225.0) < 0.01
-    assert abs(result["capital_mm"] - 27.0) < 0.01
+    # EAD = 200 + 1.00 * (250-200) = 250; RW=0.50; RWA=125; Capital=15.0
+    assert abs(result["ead_mm"] - 250.0) < 0.01
+    assert abs(result["rwa_mm"] - 125.0) < 0.01
+    assert abs(result["capital_mm"] - 15.0) < 0.01
 
 
 def test_scf_uncommitted_bbb_rated():
@@ -24,10 +24,10 @@ def test_scf_uncommitted_bbb_rated():
         committed=False,
         obligor_rating="BBB",
     )
-    # EAD = 100 + (150 * 0.20) = 130; RW=1.00; RWA=130; Capital=15.6
-    assert abs(result["ead_mm"] - 130.0) < 0.01
-    assert abs(result["rwa_mm"] - 130.0) < 0.01
-    assert abs(result["capital_mm"] - 15.6) < 0.01
+    # EAD = 100 + 0.20 * (150-100) = 110; RW=1.00; RWA=110; Capital=13.2
+    assert abs(result["ead_mm"] - 110.0) < 0.01
+    assert abs(result["rwa_mm"] - 110.0) < 0.01
+    assert abs(result["capital_mm"] - 13.2) < 0.01
 
 
 def test_inventory_uncommitted_bbb():
@@ -38,7 +38,7 @@ def test_inventory_uncommitted_bbb():
         committed=False,
         obligor_rating="BBB",
     )
-    # EAD = 70 + (100 * 0.50) = 120; RW=1.00; RWA=120; Capital=14.4
-    assert abs(result["ead_mm"] - 120.0) < 0.01
-    assert abs(result["rwa_mm"] - 120.0) < 0.01
-    assert abs(result["capital_mm"] - 14.4) < 0.01
+    # EAD = 70 + 0.50 * (100-70) = 85; RW=1.00; RWA=85; Capital=10.2
+    assert abs(result["ead_mm"] - 85.0) < 0.01
+    assert abs(result["rwa_mm"] - 85.0) < 0.01
+    assert abs(result["capital_mm"] - 10.2) < 0.01

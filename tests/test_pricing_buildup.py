@@ -9,10 +9,8 @@ def test_returns_positive_clearing_margin():
         committed=True,
         obligor_rating="A",
         fees_bps=25,
-        start_bps=400,
-        step_bps=10,
-        max_bps=1000,
     )
     assert result["clearing_margin_bps"] > 0
+    assert result["clearing_margin_bps"] <= 500
     assert result["roe_result"]["roe"] >= 0.12
     assert result["hurdle_headroom_bps"] >= 0

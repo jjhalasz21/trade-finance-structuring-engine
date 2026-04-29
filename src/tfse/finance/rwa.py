@@ -17,7 +17,7 @@ def compute_rwa(
     obligor_rating: str,
 ) -> dict:
     ccf = _ccf(product, committed)
-    ead_mm = drawn_mm + (limit_mm * ccf)
+    ead_mm = drawn_mm + ccf * (limit_mm - drawn_mm)
     rw = RISK_WEIGHTS.get(obligor_rating, 1.00)
     rwa_mm = ead_mm * rw
     capital_mm = rwa_mm * 0.12
