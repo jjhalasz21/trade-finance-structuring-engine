@@ -1,0 +1,22 @@
+{
+  "client_name": "Atlantic Metals Trading",
+  "sector": "Materials - Base Metals Trading",
+  "revenue_mm": 800,
+  "ar_balance_mm": null,
+  "ap_balance_mm": null,
+  "top_obligors": [
+    {"name": "Glencore", "rating": "BBB", "exposure_pct": 0.40},
+    {"name": "Trafigura", "rating": "BBB", "exposure_pct": 0.35},
+    {"name": "Louis Dreyfus", "rating": "A", "exposure_pct": 0.25}
+  ],
+  "wc_gap_mm": 100,
+  "payment_terms_days": 60,
+  "off_bs_appetite": false,
+  "banking_relationships": ["ING", "Rabobank"],
+  "dilution_rate_pct": 0.5,
+  "inventory_mm": 145,
+  "inventory_commodities": ["LME_COPPER", "LME_ALUMINUM"],
+  "supplier_count": null,
+  "dpo_current_days": null,
+  "dpo_target_days": null
+}

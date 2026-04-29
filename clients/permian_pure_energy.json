@@ -1,0 +1,22 @@
+{
+  "client_name": "Permian Pure Energy",
+  "sector": "Energy - E&P / Natural Gas",
+  "revenue_mm": 1200,
+  "ar_balance_mm": null,
+  "ap_balance_mm": 190,
+  "top_obligors": [
+    {"name": "Southwestern Energy", "rating": "BB", "exposure_pct": 0.30},
+    {"name": "Dominion Energy", "rating": "A", "exposure_pct": 0.45},
+    {"name": "Targa Resources", "rating": "BBB", "exposure_pct": 0.25}
+  ],
+  "wc_gap_mm": 150,
+  "payment_terms_days": 45,
+  "off_bs_appetite": false,
+  "banking_relationships": ["Citibank", "Bank of America"],
+  "dilution_rate_pct": 1.0,
+  "inventory_mm": null,
+  "inventory_commodities": [],
+  "supplier_count": 85,
+  "dpo_current_days": 45,
+  "dpo_target_days": 75
+}

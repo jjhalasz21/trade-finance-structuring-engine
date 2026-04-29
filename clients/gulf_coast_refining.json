@@ -1,0 +1,24 @@
+{
+  "client_name": "Gulf Coast Refining LLC",
+  "sector": "Energy - Downstream / Refining",
+  "revenue_mm": 4000,
+  "ar_balance_mm": 320,
+  "ap_balance_mm": null,
+  "top_obligors": [
+    {"name": "Delta Air Lines", "rating": "BBB", "exposure_pct": 0.18},
+    {"name": "Shell Trading US", "rating": "AA", "exposure_pct": 0.17},
+    {"name": "Marathon Petroleum", "rating": "BBB", "exposure_pct": 0.15},
+    {"name": "Phillips 66 Partners", "rating": "BBB", "exposure_pct": 0.10},
+    {"name": "Pilot Flying J", "rating": "A", "exposure_pct": 0.05}
+  ],
+  "wc_gap_mm": 200,
+  "payment_terms_days": 30,
+  "off_bs_appetite": true,
+  "banking_relationships": ["JPMorgan", "Wells Fargo"],
+  "dilution_rate_pct": 2.5,
+  "inventory_mm": null,
+  "inventory_commodities": [],
+  "supplier_count": null,
+  "dpo_current_days": null,
+  "dpo_target_days": null
+}
