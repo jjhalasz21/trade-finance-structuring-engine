@@ -12,6 +12,7 @@ FTP_RATE = 0.0535  # SOFR proxy
 # Basel III CCF by product + commitment
 CCF = {
     "RF_COMMITTED": 1.00,
+    # "RF_UNCOMMITTED": 0.20,  # not supported in this version
     "SCF_UNCOMMITTED": 0.20,
     "INVENTORY_UNCOMMITTED": 0.50,
 }
@@ -40,9 +41,10 @@ OPEX = {
 ADVANCE_RATE_RF = {
     "AAA": 0.90, "AA": 0.90, "A": 0.87,
     "BBB": 0.85, "BB": 0.80,
+    # B and CCC rated obligors are not eligible for RF facilities
 }
 ADVANCE_RATE_INVENTORY = {
     "LME_COPPER": 0.70,
     "LME_ALUMINUM": 0.65,
 }
-INVENTORY_HAIRCUT_DAYS = 1
+INVENTORY_HAIRCUT_DAYS = 1  # number of LME price days for liquidation haircut; product module uses 0.01 (1%) as proxy
