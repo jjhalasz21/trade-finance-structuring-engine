@@ -1,7 +1,7 @@
 __pycache__/
 *.pyc
 .env
-outputs/
+/outputs/
 *.egg-info/
 .eggs/
 dist/
