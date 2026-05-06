@@ -76,6 +76,14 @@ class Economics(BaseModel):
     clearing_margin_bps: int
     hurdle_headroom_bps: int
     sensitivity: list[SensitivityRow]
+    distribution_pct: float = 0.0
+    distribution_fee_bps: int = 0
+    distributed_mm: float = 0.0
+    fee_income_mm: float = 0.0
+    retained_mm: float = 0.0
+    retained_rwa_mm: float = 0.0
+    retained_capital_mm: float = 0.0
+    retained_roe: float = 0.0
 
 
 class PitchBundle(BaseModel):

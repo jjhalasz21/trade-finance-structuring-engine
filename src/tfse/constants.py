@@ -48,3 +48,10 @@ ADVANCE_RATE_INVENTORY = {
     "LME_ALUMINUM": 0.65,
 }
 INVENTORY_HAIRCUT_DAYS = 1  # number of LME price days for liquidation haircut; product module uses 0.01 (1%) as proxy
+
+DISTRIBUTION_FEE_BPS: dict[str, int] = {
+    "RF": 30,
+    "SCF": 25,
+    "INVENTORY": 35,
+}
+DISTRIBUTION_PCT_DEFAULT: float = 0.12
