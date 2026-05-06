@@ -66,6 +66,14 @@ def _mock_economics():
         sensitivity=[
             SensitivityRow(utilization_pct=0.75, margin_bps=130, roe=0.135)
         ],
+        distribution_pct=0.12,
+        distribution_fee_bps=30,
+        distributed_mm=15.6,
+        fee_income_mm=0.0468,
+        retained_mm=114.4,
+        retained_rwa_mm=57.2,
+        retained_capital_mm=6.864,
+        retained_roe=0.138,
     )
 
 
@@ -99,6 +107,10 @@ def test_output_generators_produce_artifacts(tmp_path):
     assert cme["roe_pct"] == pytest.approx(13.5, abs=0.01)
     assert cme["status"] == "Indicative"
     assert cme["product_code"] == "GTS-RF-001"
+
+    assert economics.distribution_pct == 0.12
+    assert economics.retained_roe > 0
+    assert pdf_path.stat().st_size > 1000
 
 
 def test_three_client_jsons_parse():
