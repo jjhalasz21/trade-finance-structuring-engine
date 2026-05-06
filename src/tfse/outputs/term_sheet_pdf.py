@@ -68,6 +68,31 @@ def generate_term_sheet(
         elements.append(Paragraph(f"• {criterion}", normal))
     elements.append(Spacer(1, 0.2*inch))
 
+    if economics.distribution_pct > 0:
+        elements.append(Paragraph("Distribution Structure", h2))
+        dist_data = [
+            ["Parameter", "Details"],
+            ["Structure", "Originate-to-Distribute"],
+            ["HSBC Retained", f"{1 - economics.distribution_pct:.0%} of facility (${economics.retained_mm:.0f}M)"],
+            ["Distributed to Investors", f"{economics.distribution_pct:.0%} of facility (${economics.distributed_mm:.0f}M)"],
+            ["Arrangement Fee", f"{economics.distribution_fee_bps}bps p.a. on distributed amount"],
+            ["Retained RoE", f"{economics.retained_roe:.1%}"],
+        ]
+        td = Table(dist_data, colWidths=[2.5 * inch, 4 * inch])
+        td.setStyle(TableStyle([
+            ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#CC0000")),
+            ("TEXTCOLOR", (0, 0), (-1, 0), colors.white),
+            ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+            ("FONTSIZE", (0, 0), (-1, -1), 9),
+            ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#F5F5F5")]),
+            ("GRID", (0, 0), (-1, -1), 0.5, colors.lightgrey),
+            ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
+            ("TOPPADDING", (0, 0), (-1, -1), 4),
+            ("BOTTOMPADDING", (0, 0), (-1, -1), 4),
+        ]))
+        elements.append(td)
+        elements.append(Spacer(1, 0.2 * inch))
+
     elements.append(Paragraph("Key Conditions Precedent", h2))
     cps = [
         "Execution of facility agreement and all ancillary documents",
