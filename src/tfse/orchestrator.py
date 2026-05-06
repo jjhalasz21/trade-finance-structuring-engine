@@ -82,9 +82,10 @@ def run_pipeline_in_memory(
     distribution_pct: float = 0.12,
     distribution_fee_bps: int | None = None,
 ) -> tuple:
-    """Run the full pipeline and return artifact bytes for Streamlit download buttons.
+    """Run the full pipeline and return model objects and artifact bytes for Streamlit.
 
     Returns: (profile, diagnostic, structure, economics, pitch_text, pdf_bytes, xlsx_bytes, md_str, cme_dict)
+    Note: md_str is the same string as pitch_text (pitch deck markdown = pitch narrative).
     """
     profile = run_intake(raw)
     diagnostic = run_diagnostic(profile)
