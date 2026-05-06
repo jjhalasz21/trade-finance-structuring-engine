@@ -110,7 +110,7 @@ def test_output_generators_produce_artifacts(tmp_path):
 
     assert economics.distribution_pct == 0.12
     assert economics.retained_roe > 0
-    assert pdf_path.stat().st_size > 1000
+    assert pdf_path.stat().st_size > 3000
 
 
 def test_three_client_jsons_parse():
