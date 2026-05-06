@@ -1,0 +1,15 @@
+{
+  "deal_name": "Gulf Coast Refining LLC \u2014 RF Facility",
+  "client_id": "GULF_COAST_REFINING_LLC",
+  "product_code": "GTS-RF-001",
+  "facility_size_mm": 250.0,
+  "sector": "Energy - Downstream / Refining",
+  "indicative_margin_bps": 145,
+  "expected_annual_revenue_mm": 5.625,
+  "rwa_mm": 250.0,
+  "roe_pct": 12.19,
+  "status": "Indicative",
+  "date_created": "2026-05-06",
+  "relationship_manager": "HSBC GTS Sales",
+  "next_step": "Credit application and KYC submission"
+}

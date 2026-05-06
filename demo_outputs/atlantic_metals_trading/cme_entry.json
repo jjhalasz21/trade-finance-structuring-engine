@@ -1,0 +1,15 @@
+{
+  "deal_name": "Atlantic Metals Trading \u2014 INVENTORY Facility",
+  "client_id": "ATLANTIC_METALS_TRADING",
+  "product_code": "GTS-INV-001",
+  "facility_size_mm": 97.0,
+  "sector": "Materials - Base Metals Trading",
+  "indicative_margin_bps": 250,
+  "expected_annual_revenue_mm": 2.073,
+  "rwa_mm": 84.875,
+  "roe_pct": 12.22,
+  "status": "Indicative",
+  "date_created": "2026-05-06",
+  "relationship_manager": "HSBC GTS Sales",
+  "next_step": "Credit application and KYC submission"
+}

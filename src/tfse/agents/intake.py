@@ -1,4 +1,5 @@
 import json
+import re
 import anthropic
 from tfse.constants import MODEL_HAIKU, ANTHROPIC_API_KEY
 from tfse.models import ClientProfile
@@ -13,6 +14,28 @@ INTAKE_SYSTEM = (
 )
 
 
+def _extract_json(text: str) -> str:
+    """Extract JSON object from response text, stripping markdown fences or extra prose."""
+    text = text.strip()
+    # Try to extract from code fence first
+    m = re.search(r"```(?:json)?\s*([\s\S]*?)```", text)
+    if m:
+        return m.group(1).strip()
+    # Otherwise find the first { ... } block
+    start = text.find("{")
+    if start != -1:
+        # Find matching closing brace
+        depth = 0
+        for i, ch in enumerate(text[start:], start):
+            if ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    return text[start:i + 1]
+    return text
+
+
 def run_intake(raw: dict) -> ClientProfile:
     response = _client.messages.create(
         model=MODEL_HAIKU,
@@ -21,5 +44,5 @@ def run_intake(raw: dict) -> ClientProfile:
         system=INTAKE_SYSTEM,
         messages=[{"role": "user", "content": json.dumps(raw, indent=2)}],
     )
-    cleaned = json.loads(response.content[0].text)
+    cleaned = json.loads(_extract_json(response.content[0].text))
     return ClientProfile(**cleaned)
