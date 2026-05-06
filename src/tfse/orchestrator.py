@@ -1,5 +1,6 @@
 import json
 import os
+import tempfile
 from pathlib import Path
 from rich.console import Console
 from rich.progress import Progress, SpinnerColumn, TextColumn
@@ -74,3 +75,32 @@ def run(client_json_path: str) -> None:
     console.print(f"  [cyan]Profitability Model:[/cyan] {xlsx_path}")
     console.print(f"  [cyan]Pitch Deck (MD):[/cyan]     {md_path}")
     console.print(f"  [cyan]CRM Entry:[/cyan]           {cme_path}")
+
+
+def run_pipeline_in_memory(
+    raw: dict,
+    distribution_pct: float = 0.12,
+    distribution_fee_bps: int | None = None,
+) -> tuple:
+    """Run the full pipeline and return artifact bytes for Streamlit download buttons.
+
+    Returns: (profile, diagnostic, structure, economics, pitch_text, pdf_bytes, xlsx_bytes, md_str, cme_dict)
+    """
+    profile = run_intake(raw)
+    diagnostic = run_diagnostic(profile)
+    structure = run_structuring(profile, diagnostic)
+    economics = run_pricing(profile, structure, distribution_pct, distribution_fee_bps)
+    bundle = PitchBundle(profile=profile, diagnostic=diagnostic, structure=structure, economics=economics)
+    pitch_text = run_pitch(bundle)
+
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmp = Path(tmpdir)
+        pdf_path = generate_term_sheet(profile, structure, economics, tmp / "term_sheet.pdf")
+        xlsx_path = generate_profitability_model(structure, economics, tmp / "profitability_model.xlsx")
+        cme_path = generate_cme_payload(profile, structure, economics, tmp / "cme_entry.json")
+
+        pdf_bytes = pdf_path.read_bytes()
+        xlsx_bytes = xlsx_path.read_bytes()
+        cme_dict = json.loads(cme_path.read_text())
+
+    return profile, diagnostic, structure, economics, pitch_text, pdf_bytes, xlsx_bytes, pitch_text, cme_dict
