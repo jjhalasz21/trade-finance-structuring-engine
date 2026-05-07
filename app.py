@@ -60,8 +60,8 @@ DEMO_CLIENTS = [
         "facility_mm": 250,
         "margin": "SOFR+145bps",
         "roe": 0.1219,
-        "dist_pct": 0.12,
-        "retained_roe": 0.1244,
+        "dist_pct": 0.25,
+        "retained_roe": 0.1285,
     },
     {
         "name": "Permian Pure Energy",
@@ -69,10 +69,10 @@ DEMO_CLIENTS = [
         "sector": "Energy — E&P",
         "product": "SCF",
         "facility_mm": 152,
-        "margin": "SOFR+200bps",
-        "roe": 0.1217,
-        "dist_pct": 0.12,
-        "retained_roe": 0.1270,
+        "margin": "SOFR+215bps",
+        "roe": 0.1235,
+        "dist_pct": 0.30,
+        "retained_roe": 0.1320,
     },
     {
         "name": "Atlantic Metals Trading",
@@ -80,12 +80,60 @@ DEMO_CLIENTS = [
         "sector": "Materials — Metals",
         "product": "INVENTORY",
         "facility_mm": 97,
-        "margin": "SOFR+250bps",
-        "roe": 0.1222,
-        "dist_pct": 0.12,
-        "retained_roe": 0.1256,
+        "margin": "SOFR+310bps",
+        "roe": 0.1312,
+        "dist_pct": 0.40,
+        "retained_roe": 0.1445,
     },
 ]
+
+CLIENT_BIOS = {
+    "gulf_coast_refining": (
+        "A mid-size independent petroleum refiner operating two Gulf Coast refineries "
+        "with ~240,000 bbl/day combined throughput. The business buys crude on 30-day "
+        "terms from producers and sells gasoline, diesel, and jet fuel to distributors "
+        "on 45–60 day terms — a structural working capital gap of $180–220M that widens "
+        "with every crude price spike. A Q3 2025 surge in WTI compressed margins and "
+        "stressed their revolving credit facility covenants simultaneously, leaving the "
+        "CFO reluctant to draw further. Gulf Coast is sitting on ~$260M in diversified, "
+        "investment-grade receivables across 12+ fuel distributor counterparties with no "
+        "efficient mechanism to monetize them.\n\n"
+        "**HSBC solution:** Receivables finance — HSBC acquires the eligible AR pool at "
+        "a discount reflecting SOFR+145bps, providing immediate liquidity without adding "
+        "leverage. 25% of the facility is distributed to institutional investors, "
+        "reducing HSBC's balance sheet commitment while earning an arrangement fee."
+    ),
+    "permian_pure_energy": (
+        "A focused Permian Basin E&P running ~85,000 boe/day net production. A 2024 "
+        "bolt-on acquisition of adjacent acreage accelerated their completions program "
+        "to 4 active rigs and a $650M annual capex budget. That growth has ballooned "
+        "their AP stack to $145M across 80+ vendors — drilling contractors, pipe "
+        "suppliers, wireline firms — all demanding payment within 30–45 days while "
+        "production revenues lag completions by 60–90 days. Smaller vendors are "
+        "tightening credit terms, and Permian Pure's treasury team is managing vendor "
+        "relationships that should be running on autopilot.\n\n"
+        "**HSBC solution:** Supply Chain Finance — Permian Pure extends standard payment "
+        "terms to 90 days while their suppliers receive payment in 2–3 business days at "
+        "a modest discount funded at SOFR+215bps. DPO improves, vendor friction drops, "
+        "and working capital is freed up for the next rig. 30% distributed to "
+        "institutional SCF investors."
+    ),
+    "atlantic_metals_trading": (
+        "A London-headquartered base metals merchant with US operations in New York, "
+        "trading copper, aluminum, and zinc across the Atlantic basin. Atlantic sources "
+        "physical metal from South American and European smelters, warehouses it in "
+        "LME-approved facilities in New Orleans and Baltimore, and sells to US and "
+        "European manufacturers — with average holding periods of 45–75 days and a "
+        "typical inventory position of $85–100M. Their existing inventory finance line "
+        "is fully drawn, forcing them to pass on profitable trades during the current "
+        "aluminum supply disruption out of Mozambique.\n\n"
+        "**HSBC solution:** Secured inventory finance — a borrowing base facility "
+        "collateralized by LME-grade metal at 65–70% advance rates against warehouse "
+        "receipts, supported by LME forward hedges. SOFR+310bps reflects commodity "
+        "collateral risk. 40% distributed to specialist commodity finance investors, "
+        "reducing HSBC's concentration exposure."
+    ),
+}
 
 DEMO_DIR = Path("demo_outputs")
 
@@ -120,13 +168,16 @@ with tab_demo:
             st.markdown(f"**{client['name']}**")
             st.caption(client["sector"])
 
+            slug = client["slug"]
+            with st.expander("Client brief"):
+                st.markdown(CLIENT_BIOS.get(slug, ""))
+
             st.metric("Facility Limit", f"${client['facility_mm']}M")
             st.metric("Clearing Margin", client["margin"])
             st.metric("Full-Hold RoE", f"{client['roe']:.1%}")
             st.metric("Distribution", f"{client['dist_pct']:.0%}")
             st.metric("Retained RoE", f"{client['retained_roe']:.1%}")
 
-            slug = client["slug"]
             pdf_bytes = _load_artifact(slug, "term_sheet.pdf")
             xlsx_bytes = _load_artifact(slug, "profitability_model.xlsx")
             md_bytes = _load_artifact(slug, "pitch_deck.md")
